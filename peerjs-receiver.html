@@ -1,0 +1,42 @@
+<script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+<script type="text/javascript">
+  // https://github.com/peers/peerjs
+
+  // go here to get your own key
+	var peerjsPeer =  new Peer('87654321', {
+	    host: 'localhost',
+        port: 3000,
+        path: '/peerjs',
+	});
+	peerjsPeer.on('open', function() {
+		console.log('My peerjsPeer ID is: ', peerjsPeer.id);
+	});
+
+	peerjsPeer.on('connection', function(conn) {
+
+        conn.on('open', function() {
+            var acceptsCall = confirm("Connection incoming from "+conn.metadata.name+", do you want to accept it ?");
+
+            if(acceptsCall) {
+
+                // Receive messages
+                conn.on('data', function (data) {
+                    console.log('Received', data);
+                });
+
+                // Send messages
+                conn.send('Hello from markers-page!');
+            }
+            else{
+                conn.close();
+            }
+
+		});
+
+        //close connection
+        conn.on('close', function(data) {
+            console.log('Connection closed');
+        });
+	});
+	// var conn = peer.connect('arjs-marker-page');
+</script>
