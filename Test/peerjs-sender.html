@@ -1,15 +1,19 @@
 <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
 <script type="text/javascript">
 	var peer = new Peer('12345678', {
-	    host: 'https://pemus.herokuapp.com/',
-        port: 28769,
+	    host: 'localhost',
+        port: 3000,
         path: '/peerjs'
 	});
 
 	peer.on('open', function(id) {
 		console.log('My peer ID is: ' + id);
 	});
-	
+
+    peer.on('error', function(err){
+        console.log('Connection error');
+    });
+
 	function connect(peerID){
 		var conn = peer.connect(peerID,{
 		    metadata: {
@@ -35,7 +39,11 @@
         conn.on('close', function() {
             console.log('Connection closed');
         });
+        conn.on('error', function() {
+
+        });
 	}
 
-	connect('87654321')
+	connect('87654321');
+    peer.disconnect();
 </script>
