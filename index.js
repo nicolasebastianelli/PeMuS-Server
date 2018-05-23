@@ -9,5 +9,6 @@ var srv = app.listen(port, function() {
 });
 
 app.use('/peerjs', require('peer').ExpressPeerServer(srv, {
+    allow_discovery: true,
     debug: true
 }));

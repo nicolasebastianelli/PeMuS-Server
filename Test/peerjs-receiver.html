@@ -1,5 +1,7 @@
+
 <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
 <script type="text/javascript">
+
   // https://github.com/peers/peerjs
 
   // go here to get your own key
@@ -11,6 +13,10 @@
 	peerjsPeer.on('open', function() {
 		console.log('My peerjsPeer ID is: ', peerjsPeer.id);
 	});
+
+  peerjsPeer.on('error', function(err) {
+      console.log(err);
+  });
 
 	peerjsPeer.on('connection', function(conn) {
 
@@ -25,7 +31,7 @@
                 });
 
                 // Send messages
-                conn.send('Hello from markers-page!');
+                conn.send('Hello from Receiver!');
             }
             else{
                 conn.close();
@@ -38,5 +44,4 @@
             console.log('Connection closed');
         });
 	});
-	// var conn = peer.connect('arjs-marker-page');
 </script>

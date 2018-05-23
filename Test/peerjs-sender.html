@@ -11,7 +11,7 @@
 	});
 
     peer.on('error', function(err){
-        console.log('Connection error');
+        console.log(err);
     });
 
 	function connect(peerID){
@@ -30,7 +30,7 @@
 			});
 
 			// Send messages
-			conn.send('Hello from phone!');
+			conn.send('Hello from sender!');
 
 
 
@@ -45,5 +45,4 @@
 	}
 
 	connect('87654321');
-    peer.disconnect();
 </script>
